@@ -1,0 +1,15 @@
+{
+  "filmes" : [ {
+    "id" : 0,
+    "titulo" : "a",
+    "sinopse" : "a",
+    "genero" : "a",
+    "diretor" : "a"
+  }, {
+    "id" : 1,
+    "titulo" : "b",
+    "sinopse" : "b",
+    "genero" : "b",
+    "diretor" : "b"
+  } ]
+}

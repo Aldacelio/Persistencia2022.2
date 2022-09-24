@@ -1,0 +1,18 @@
+<ListaDeFilmes>
+  <Filmes>
+    <Filme>
+      <id>0</id>
+      <titulo>a</titulo>
+      <sinopse>a</sinopse>
+      <genero>a</genero>
+      <diretor>a</diretor>
+    </Filme>
+    <Filme>
+      <id>1</id>
+      <titulo>b</titulo>
+      <sinopse>b</sinopse>
+      <genero>b</genero>
+      <diretor>b</diretor>
+    </Filme>
+  </Filmes>
+</ListaDeFilmes>
