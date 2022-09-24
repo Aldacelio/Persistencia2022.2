@@ -14,30 +14,28 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
 public class ConverteJson {
-    public void converte() throws Exception{
+    public void converte(Scanner scanner) throws Exception{
         String arquivo;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o nome do arquivo json: ");
-        arquivo = scanner.nextLine();
-        File file = new File(arquivo);
+        arquivo = scanner.next();
+        String arquivoSemExtensao = arquivo.substring(0, arquivo.lastIndexOf('.'));
+        File file = new File(arquivoSemExtensao+".json");
         ArrayFilmes filmes = new ObjectMapper().readValue(file, ArrayFilmes.class);
-        
 
-        converteXml(filmes);
-        converteCsv(filmes);
-        scanner.close();
+        converteXml(filmes,arquivoSemExtensao);
+        converteCsv(filmes,arquivoSemExtensao);
 
     }
 
-    public void converteXml(ArrayFilmes filmes) throws Exception{
-        File f = new File("Filmes.xml");
+    public void converteXml(ArrayFilmes filmes, String arquivoSemExtensao) throws Exception{
+        File f = new File(arquivoSemExtensao+".xml");
         XmlMapper xm = new XmlMapper();
         xm.enable(SerializationFeature.INDENT_OUTPUT);
         xm.writeValue(f,filmes);
     }
 
-    public void converteCsv(ArrayFilmes filmes) throws Exception{
-        Writer writer = Files.newBufferedWriter(Paths.get("Filmes.csv"));
+    public void converteCsv(ArrayFilmes filmes, String arquivoSemExtensao) throws Exception{
+        Writer writer = Files.newBufferedWriter(Paths.get(arquivoSemExtensao+".csv"));
         StatefulBeanToCsv<ArrayFilmes> beanToCsv = new StatefulBeanToCsvBuilder<ArrayFilmes>(writer).build();
 
 

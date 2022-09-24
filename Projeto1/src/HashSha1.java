@@ -7,16 +7,14 @@ import java.security.MessageDigest;
 import java.util.Scanner;
 
 public class HashSha1 {
-    public void gerar() throws Exception{
+    public void gerar(Scanner scanner) throws Exception{
         String arquivo,hexa;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o nome do arquivo: ");
-        arquivo = scanner.nextLine();
+        arquivo = scanner.next();
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         md.update(arquivo.getBytes(),0,arquivo.length());
         byte[] digest = md.digest();
         hexa = new BigInteger(1,digest).toString(16);
         System.out.println("A HASH SHA-1 do arquivo é : "+hexa);
-        scanner.close();
     }
 }

@@ -12,14 +12,14 @@ import java.util.zip.ZipOutputStream;
 
 public class Compactar {
 
-    public void zip() throws Exception{
+    public void zip(Scanner scanner) throws Exception{
         int tam_buffer = 4096, cont;
         byte[] dados = new byte[tam_buffer];
         String arquivo;
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o nome do arquivo: ");
-        arquivo = scanner.nextLine();
+        arquivo = scanner.next();
+        String arquivoSemExtensao = arquivo.substring(0, arquivo.lastIndexOf('.'));
 
         BufferedInputStream origem = null;
         FileInputStream streamDeEntrada = null;
@@ -27,7 +27,7 @@ public class Compactar {
         ZipOutputStream saida = null;
         ZipEntry entry = null;
 
-        destino = new FileOutputStream(new File("Filmes.zip"));
+        destino = new FileOutputStream(new File(arquivoSemExtensao+".zip"));
         saida = new ZipOutputStream(new BufferedOutputStream(destino));
         File file = new File(arquivo);
         streamDeEntrada = new FileInputStream(file);
@@ -41,6 +41,5 @@ public class Compactar {
         
         origem.close();
         saida.close();
-        scanner.close();
     }
 }

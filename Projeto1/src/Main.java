@@ -1,8 +1,10 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         int opcao,aux = 0;
+        String novo;
         Scanner scanner = new Scanner(System.in);
 
         while(aux == 0){
@@ -16,17 +18,23 @@ public class Main {
             opcao = scanner.nextInt();
 
             if(opcao == 1){
-                CadastraFilme cadastraFilme = new CadastraFilme();
-                cadastraFilme.cadastrar();
+                System.out.println("Digite o nome do sua lista de filmes: ");
+                novo = scanner.next();
+                if(new File(novo+".json").exists()){
+                    System.out.println("Nome de lista ja existe");
+                }else{
+                    CadastraFilme cadastraFilme = new CadastraFilme();
+                    cadastraFilme.cadastrar(scanner,novo);
+                }
             }else if(opcao == 2){
                 ConverteJson converteJson = new ConverteJson();
-                converteJson.converte();
+                converteJson.converte(scanner);
             }else if(opcao == 3){
                 Compactar compactar = new Compactar();
-                compactar.zip();
+                compactar.zip(scanner);
             }else if(opcao == 4){
                 HashSha1 hashSha1 = new HashSha1();
-                hashSha1.gerar();    
+                hashSha1.gerar(scanner);    
             }else if(opcao == 5){
                 aux = 1;
             }else{
