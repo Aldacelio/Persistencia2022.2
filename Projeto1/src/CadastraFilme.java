@@ -19,26 +19,27 @@ public class CadastraFilme {
         while (aux == 0) {
 
             System.out.println("Digite o titulo do filme: ");
-            titulo = scanner.next();
+            titulo = scanner.nextLine();
 
             System.out.println("Digite o sinopse do filme: ");
-            sinopse = scanner.next();
+            sinopse = scanner.nextLine();
 
             System.out.println("Digite o genero do filme: ");
-            genero = scanner.next();
+            genero = scanner.nextLine();
 
             System.out.println("Digite o diretor do filme: ");
-            diretor = scanner.next();
+            diretor = scanner.nextLine();
 
             Filmes elemento = new Filmes(id, titulo, sinopse, genero, diretor);
 
-            lista.add(elemento);
+            lista.add(elemento); 
 
             while (auxsn == 0) {
                 System.out.println("1 - Cadastrar mais um filme.");
                 System.out.println("2 - Voltar para o menu principal.");
                 System.out.println("3 - Sair.");
                 confirm = scanner.nextInt();
+                scanner.nextLine();
                 if (confirm == 1) {
                     id += 1;
                     auxsn = 1;
@@ -47,17 +48,22 @@ public class CadastraFilme {
                     aux = 1;
                     break;
                 } else if (confirm == 3) {
-                    System.exit(0);
+                    ArrayFilmes filmes = new ArrayFilmes(lista);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                    objectMapper.writeValue(new File(novo+".json"), filmes);
+                    System.exit(0);;
                 } else {
                     System.out.println("Digite apenas sim ou não !!!");
                 }
             }
             auxsn = 0;
         }
-
+        
         ArrayFilmes filmes = new ArrayFilmes(lista);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.writeValue(new File(novo+".json"), filmes);
+        
     }
 }

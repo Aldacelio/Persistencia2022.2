@@ -18,7 +18,8 @@ public class Compactar {
         String arquivo;
 
         System.out.println("Digite o nome do arquivo: ");
-        arquivo = scanner.next();
+        scanner.nextLine();
+        arquivo = scanner.nextLine();
         String arquivoSemExtensao = arquivo.substring(0, arquivo.lastIndexOf('.'));
 
         BufferedInputStream origem = null;

@@ -10,7 +10,8 @@ public class HashSha1 {
     public void gerar(Scanner scanner) throws Exception{
         String arquivo,hexa;
         System.out.println("Digite o nome do arquivo: ");
-        arquivo = scanner.next();
+        scanner.nextLine();
+        arquivo = scanner.nextLine();
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         md.update(arquivo.getBytes(),0,arquivo.length());
         byte[] digest = md.digest();

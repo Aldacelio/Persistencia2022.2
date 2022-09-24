@@ -17,7 +17,8 @@ public class ConverteJson {
     public void converte(Scanner scanner) throws Exception{
         String arquivo;
         System.out.println("Digite o nome do arquivo json: ");
-        arquivo = scanner.next();
+        scanner.nextLine();
+        arquivo = scanner.nextLine();
         String arquivoSemExtensao = arquivo.substring(0, arquivo.lastIndexOf('.'));
         File file = new File(arquivoSemExtensao+".json");
         ArrayFilmes filmes = new ObjectMapper().readValue(file, ArrayFilmes.class);
