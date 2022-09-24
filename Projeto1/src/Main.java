@@ -18,7 +18,7 @@ public class Main {
             opcao = scanner.nextInt();
 
             if(opcao == 1){
-                System.out.println("Digite o nome do sua lista de filmes: ");
+                System.out.println("Digite o nome da sua nova lista de filmes: ");
                 novo = scanner.next();
                 if(new File(novo+".json").exists()){
                     System.out.println("Nome de lista ja existe");
