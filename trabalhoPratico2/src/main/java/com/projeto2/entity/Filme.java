@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.ToString;
 
 
 @Entity
-@Table(name = "Filme")
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -38,15 +38,14 @@ public class Filme {
     @Setter
     private String titulo;
 
-    @NonNull
     @Getter
     @Setter
     private int anoLancamento;
 
    
-    @OneToMany
+    @ManyToMany
     @Getter
     @Setter
-    private List<Ator> ator;
+    private List<Ator> atores;
     
 }

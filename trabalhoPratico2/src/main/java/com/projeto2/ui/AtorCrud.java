@@ -3,7 +3,6 @@ package com.projeto2.ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 
 import javax.swing.JOptionPane;
 
@@ -17,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.expression.ParseException;
 
 import com.projeto2.dao.AtorDAO;
-import com.projeto2.dao.FilmeDAO;
+// import com.projeto2.dao.FilmeDAO;
 import com.projeto2.entity.Ator;
 
 
@@ -59,7 +58,6 @@ public class AtorCrud implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        // TODO Auto-generated method stub
 
         String menu = "Escolha uma opção:\n" +
                 "1 - Inserir ator\n" +
