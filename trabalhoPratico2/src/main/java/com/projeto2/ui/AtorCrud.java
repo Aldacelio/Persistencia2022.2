@@ -47,6 +47,22 @@ public class AtorCrud implements CommandLineRunner{
 
     }
 
+    public void obterAtores(Ator cl) throws ParseException {
+        String titulo = JOptionPane.showInputDialog("Nome", cl.getNome());
+        String data = JOptionPane.showInputDialog("Data de nascimento", cl.getDataNascimento());
+
+        cl.setNome(titulo);
+        cl.setDataNascimento(alterarData(data));
+    }
+
+    public static void imprimir(Ator cl) {
+        if(cl != null){   
+            JOptionPane.showMessageDialog(null, "{Nome: "+cl.getNome()+ ", Data de nascimento: "+cl.getDataNascimento()+"}");
+        }else{
+            JOptionPane.showMessageDialog(null,"Nenhum ator encontrado");
+        }
+    }
+
     public LocalDateTime alterarData(String data){
         // DateTimeFormatter parser = new DateTimeFormatterBuilder().appendPattern("dd/MM/uuuu").toFormatter();
         // LocalDateTime dateTime = LocalDateTime.parse(data, parser);
@@ -61,6 +77,9 @@ public class AtorCrud implements CommandLineRunner{
 
         String menu = "Escolha uma opção:\n" +
                 "1 - Inserir ator\n" +
+                "2 - Atualizar por id\n" +
+                "3 - Remover por id\n" +
+                "4 - Exibir por id\n" +
                 "x - Para sair";
         char opcao;
 
@@ -73,6 +92,26 @@ public class AtorCrud implements CommandLineRunner{
                     cl = new Ator();
                     inserirAtor(cl);
                     baseAtores.save(cl);
+                    break;
+                case '2': // Atualizar por id
+                    id = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do ator a ser alterado"));
+                    cl = baseAtores.findFistByid(id);
+                    obterAtores(cl);
+                    baseAtores.save(cl);
+                    break;
+                case '3'://remover por id
+                    id = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do ator a ser removido"));
+                    cl = baseAtores.findFistByid(id);
+                    if (cl != null) {
+                        baseAtores.deleteById(cl.getId());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possível remover, pois o ator não encontrado.");
+                    }
+                    break;
+                case '4':// Exibir por id
+                    id = Integer.parseInt(JOptionPane.showInputDialog("Id"));
+                    cl = baseAtores.findById(id).orElse(null);
+                    imprimir(cl);
                     break;
             }
 

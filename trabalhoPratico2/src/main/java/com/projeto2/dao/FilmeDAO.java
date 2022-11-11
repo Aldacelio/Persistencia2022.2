@@ -1,10 +1,17 @@
 package com.projeto2.dao;
+
+import java.util.List;
+
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.projeto2.entity.Filme;
 
 @Repository
 public interface FilmeDAO extends JpaRepository<Filme,Integer> {
-    public Filme findFirstById(int id);
-    
+    @Query("select a from filme a where a.id = :id")
+    public Filme findFistByid(int id);
+
+    public List<Filme> findByTituloStartingWith(String str);
+
 }

@@ -3,6 +3,7 @@ package com.projeto2.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,17 +34,11 @@ public class Filme {
     @Setter
     private int id;
 
-    @NonNull
-    @Getter
-    @Setter
-    private String titulo;
+    @NonNull @Getter @Setter private String titulo;
 
-    @Getter
-    @Setter
-    private int anoLancamento;
-
+    @Getter @Setter private int anoLancamento;
    
-    @ManyToMany
+    @ManyToMany (mappedBy = "filmes", cascade = CascadeType.ALL)
     @Getter
     @Setter
     private List<Ator> atores;
