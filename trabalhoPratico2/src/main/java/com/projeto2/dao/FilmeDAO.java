@@ -9,9 +9,12 @@ import com.projeto2.entity.Filme;
 
 @Repository
 public interface FilmeDAO extends JpaRepository<Filme,Integer> {
-    @Query("select a from filme a where a.id = :id")
+    @Query("select f from filme f where f.id = :id")
     public Filme findFistByid(int id);
 
     public List<Filme> findByTituloStartingWith(String str);
+
+    @Query("filmeAnoLancamento")
+    public Filme findFirstByAno(int ano);
 
 }

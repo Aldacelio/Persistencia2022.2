@@ -3,6 +3,7 @@ package com.projeto2.ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -56,16 +57,18 @@ public class AtorCrud implements CommandLineRunner{
     }
 
     public static void imprimir(Ator cl) {
-        if(cl != null){   
-            JOptionPane.showMessageDialog(null, "{Nome: "+cl.getNome()+ ", Data de nascimento: "+cl.getDataNascimento()+"}");
-        }else{
-            JOptionPane.showMessageDialog(null,"Nenhum ator encontrado");
+        JOptionPane.showMessageDialog(null, cl == null ? "Nenhum aluno encontrado" : cl);
+    }
+
+    public static void listaAtores(List<Ator> atores) {
+        StringBuilder listagem = new StringBuilder();
+        for(Ator cl : atores) {
+            listagem.append(cl).append("\n");
         }
+        JOptionPane.showMessageDialog(null, listagem.length() == 0 ? "Nenhum ator encontrado" : listagem);
     }
 
     public LocalDateTime alterarData(String data){
-        // DateTimeFormatter parser = new DateTimeFormatterBuilder().appendPattern("dd/MM/uuuu").toFormatter();
-        // LocalDateTime dateTime = LocalDateTime.parse(data, parser);
         DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         // faz o parsing e setar o horário para meia-noite
         LocalDateTime dateTime = LocalDate.parse(data, parser).atStartOfDay();
@@ -80,6 +83,7 @@ public class AtorCrud implements CommandLineRunner{
                 "2 - Atualizar por id\n" +
                 "3 - Remover por id\n" +
                 "4 - Exibir por id\n" +
+                "5 - Exibir todos\n" +
                 "x - Para sair";
         char opcao;
 
@@ -113,6 +117,10 @@ public class AtorCrud implements CommandLineRunner{
                     cl = baseAtores.findById(id).orElse(null);
                     imprimir(cl);
                     break;
+                case '5':
+                    listaAtores(baseAtores.findAll());
+                    break;
+                    
             }
 
         }while(opcao != 'x');
