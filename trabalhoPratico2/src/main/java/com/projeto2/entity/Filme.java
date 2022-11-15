@@ -1,6 +1,5 @@
 package com.projeto2.entity;
 
-
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -21,14 +23,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Entity
-@Table
+@Table(name = "filme")
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
 @ToString
-@NamedQuery(name = "filmeAnoLancamento", query = "select f from filme f where f.ano = :ano")
+@NamedQueries({
+        @NamedQuery(name = "Filme.AnoLancamento", query = "select f from Filme f where f.ano = :ano")
+})
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "stringTitulo", query = "SELECT * FROM filme WHERE titulo LIKE %titulo%"),
+})
 public class Filme {
 
     @Id
@@ -37,17 +43,19 @@ public class Filme {
     @Setter
     private int id;
 
-    @NonNull @Getter @Setter private String titulo;
+    @NonNull
+    @Getter
+    @Setter
+    private String titulo;
 
-    @Getter @Setter private int anoLancamento;
-   
+    @Getter
+    @Setter
+    private int ano;
+
     @ToString.Exclude
     @ManyToMany
-    @JoinTable(name="filme_atores", 
-              joinColumns = @JoinColumn(name = "filme_fk"),
-              inverseJoinColumns = @JoinColumn(name = "ator_fk"))
+    @JoinTable(name = "filme_atores", joinColumns = @JoinColumn(name = "filme_fk"), inverseJoinColumns = @JoinColumn(name = "ator_fk"))
     @Getter
     @Setter
     private List<Ator> atores;
-    
 }
